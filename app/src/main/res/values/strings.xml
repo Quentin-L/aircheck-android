@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">GreenH</string>
+    <string name="action_settings">Settings</string>
+    <string name="info_reader">Info reader</string>
+    <string name="temperature">Temperature</string>
+    <string name="pm_2_5">PM 2.5</string>
+
+    <string name="city">城市</string>
+    <string name="temperature_C">温度</string>
+    <string name="quantity">PM2.5 指数</string>
+    <string name="quality">空气质量</string>
+    <string name="quality_good">良好</string>
+    <string name="quality_normal">正常</string>
+    <string name="quality_bad">差</string>
+    <string name="status_notConnect">Status : Not connect</string>
+    <string name="status_connect_fail">Status : Connection failed</string>
+
+</resources>
