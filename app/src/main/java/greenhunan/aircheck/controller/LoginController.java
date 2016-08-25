@@ -21,9 +21,7 @@ public class LoginController {
         if (request.login(username, password)) {
             loginCallback.onSuccess(request.getRequestInfo());
             GlobalConfig.setUser(request.getUser());
-        }
-        else
-            loginCallback.onFailure(request.getRequestInfo());
+        } else loginCallback.onFailure(request.getRequestInfo());
     }
 
 }

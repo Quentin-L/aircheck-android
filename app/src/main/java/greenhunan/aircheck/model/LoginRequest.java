@@ -2,7 +2,7 @@ package greenhunan.aircheck.model;
 
 /**
  * Created by Quentin on 8/13/16.
- *
+ * <p/>
  * handles requests for LoginActivity
  */
 public class LoginRequest {

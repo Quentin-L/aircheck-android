@@ -9,7 +9,8 @@ public class User {
     private String password;
     private String ID;
 
-    public User() { }
+    public User() {
+    }
 
     public String getID() {
         assert ID != null;
