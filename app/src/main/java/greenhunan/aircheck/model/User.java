@@ -13,7 +13,6 @@ public class User {
     }
 
     public String getID() {
-        assert ID != null;
         return ID;
     }
 
@@ -38,6 +37,5 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
-
 
 }

@@ -1,4 +1,6 @@
-package greenhunan.aircheck.model;
+package greenhunan.aircheck.service;
+
+import greenhunan.aircheck.model.User;
 
 /**
  * Created by Quentin on 8/13/16.

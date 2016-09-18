@@ -3,7 +3,6 @@ package greenhunan.aircheck.views;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.AsyncTask;
@@ -13,15 +12,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.List;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import greenhunan.aircheck.R;
 
@@ -32,11 +26,6 @@ public class LoginActivity extends AppCompatActivity {
 
     // debug 
     private static final String TAG = "LoginActivity";
-    
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
 
     private ProgressDialog mProgressDialog;
 
@@ -75,20 +64,20 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-//        mSignup.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getApplicationContext(), SignupActivity.class));
-//            }
-//        });
+        mSignup.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SignupActivity.class));
+            }
+        });
     }
 
     // TODO: 8/18/16 debug; delete later
     private void initViews() {
-        mUsernameInput = (EditText) findViewById(R.id.input_username);
+        mUsernameInput = (EditText) findViewById(R.id.input_name);
         mPasswordInput = (EditText) findViewById(R.id.input_password);
-        mLoginButton = (Button) findViewById(R.id.btn_login);
-        mSignup = (TextView) findViewById(R.id.link_signup);
+//        mLoginButton = (Button) findViewById(R.id.btn_login);
+//        mSignup = (TextView) findViewById(R.id.link_signup);
     }
 
     /**
@@ -159,64 +148,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-//    private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
-//        ArrayAdapter<String> adapter =
-//                new ArrayAdapter<>(LoginActivity.this,
-//                        android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
-//
-//        mUsernameInput.setAdapter(adapter);
-//    }
-
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String username;
-        private final String mPassword;
-
-        UserLoginTask(String username, String password) {
-            Log.i(TAG, "asyncTask object init");
-            this.username = username;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            Log.i(TAG, "attempt authentication");
-            try {
-                // TODO: attempt authentication against a network service.
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            // TODO: 8/18/16 retrieve data from server and return the message; return either true or false
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                onLoginFailed();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
-    }
-
     private void onLoginFailed() {
 //        Snackbar.make(parentView,
 //                getString(R.string.error_authentication_fail), Snackbar.LENGTH_INDEFINITE)
@@ -231,7 +162,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // override to disable going back to the MainActivity
         moveTaskToBack(true);
     }
 }
