@@ -1,7 +1,10 @@
-package greenhunan.aircheck.service;
+package greenhunan.aircheck.service.internet;
+
+import android.util.Log;
 
 import greenhunan.aircheck.GlobalConfig;
 import greenhunan.aircheck.model.SampleData;
+import greenhunan.aircheck.service.internet.RequestService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -16,39 +19,30 @@ public class UploadService {
 
     static final String TAG = "UploadService";
 
-    private static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(GlobalConfig.base_URL)
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(JacksonConverterFactory.create())
-            .build();
-
-    private static RequestService requestService = retrofit.create(RequestService.class);
-
     public static void update(final SampleData data) {
-        Call<String> tokened_call = requestService.getToken();
+        Call<String> tokened_call = ConnectionService.requestService.getToken();
         tokened_call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 String token = response.body();
-                System.out.println(token);
 
-                Call<String> update = requestService.update(token, data);
+                Call<String> update = ConnectionService.requestService.update(token, data);
                 update.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-                        System.out.println(response.body());
+                        Log.i(TAG, response.body());
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        t.printStackTrace();
+                        Log.e(TAG, "upload data failure", t);
                     }
                 });
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                t.printStackTrace();
+                Log.e(TAG, "getting token failure", t);
             }
         });
 

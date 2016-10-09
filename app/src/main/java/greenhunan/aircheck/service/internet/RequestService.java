@@ -1,8 +1,10 @@
-package greenhunan.aircheck.service;
+package greenhunan.aircheck.service.internet;
 
+import java.net.HttpCookie;
 import java.util.zip.DeflaterOutputStream;
 
 import greenhunan.aircheck.model.SampleData;
+import greenhunan.aircheck.model.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -19,4 +21,10 @@ public interface RequestService {
 
     @GET("api/insert")
     Call<String> getToken();
+
+    @POST("user/login?")
+    Call<HttpCookie> login(@Query("token") String token, @Body User user);
+
+    @GET("user/logout")
+    Call<String> logout();
 }

@@ -30,6 +30,12 @@
             android:name=".views.SignupActivity"
             android:label="@string/title_activity_signup">
         </activity>
+
+
+        <service
+            android:name=".service.DataService"
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>

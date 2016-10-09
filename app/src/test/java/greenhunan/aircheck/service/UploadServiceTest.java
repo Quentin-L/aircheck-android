@@ -3,11 +3,8 @@ package greenhunan.aircheck.service;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Date;
-
 import greenhunan.aircheck.model.SampleData;
-
-import static org.junit.Assert.*;
+import greenhunan.aircheck.service.internet.UploadService;
 
 /**
  * Created by Quentin on 9/18/16.
@@ -25,6 +22,6 @@ public class UploadServiceTest {
     @Test
     public void testUpdate() throws Exception {
         uploadService.update(data);
-        Thread.sleep(10000);
+        Thread.sleep(500);
     }
 }

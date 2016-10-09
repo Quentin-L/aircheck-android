@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
-import android.os.AsyncTask;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,7 +20,7 @@ import greenhunan.aircheck.R;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements ConnectionCallback {
 
     // debug 
     private static final String TAG = "LoginActivity";
@@ -86,9 +84,6 @@ public class LoginActivity extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-//        if (mAuthTask != null) {
-//            return;
-//        }
 
         // Reset errors.
         mUsernameInput.setError(null);
@@ -163,6 +158,16 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+    }
+
+    @Override
+    public void onResponse(int result) {
+        showProgress(false);
+    }
+
+    @Override
+    public void onFailure() {
+        showProgress(false);
     }
 }
 

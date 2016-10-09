@@ -5,19 +5,13 @@ package greenhunan.aircheck.model;
  */
 public class User {
 
+
     private String username;
     private String password;
-    private String ID;
 
-    public User() {
-    }
-
-    public String getID() {
-        return ID;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public String getPassword() {
