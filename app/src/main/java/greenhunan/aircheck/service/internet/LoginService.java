@@ -1,6 +1,9 @@
 package greenhunan.aircheck.service.internet;
 
 
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 
 import java.net.HttpCookie;
@@ -58,6 +61,7 @@ public class LoginService implements LoginRequest {
         });
 
         return state.getState();
+
     }
 
     private class State {
