@@ -17,6 +17,8 @@ import greenhunan.aircheck.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String DATA = "data";
+
     private static final String TAG = "Main Activity";
 
     @Override
