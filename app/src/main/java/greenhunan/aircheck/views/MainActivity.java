@@ -27,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int HANDLER_SETUP_BLUETOOTH = 1;
 
+    public static final int SETUP_OPEN_BLUETOOTH = 1;
+    public static final int SETUP_RECONNECT_BLUETOOTH = 2;
+
     private static final String TAG = "Main Activity";
 
     int countdown = 0;
@@ -58,6 +61,22 @@ public class MainActivity extends AppCompatActivity {
                 messageCountdown(message);
             }
         });
+        bt.setBluetoothConnectionListener(new BluetoothSPP.BluetoothConnectionListener() {
+            @Override
+            public void onDeviceConnected(String name, String address) {
+
+            }
+
+            @Override
+            public void onDeviceDisconnected() {
+                setup(SETUP_RECONNECT_BLUETOOTH);
+            }
+
+            @Override
+            public void onDeviceConnectionFailed() {
+
+            }
+        });
         if (!bt.isBluetoothAvailable())
             mHandler.sendEmptyMessageDelayed(HANDLER_SETUP_BLUETOOTH, 1000);
 
@@ -67,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (bt.isBluetoothAvailable())
-            setup();
+            setup(SETUP_OPEN_BLUETOOTH); // TODO: 10/14/16 use handler or method call? 
     }
 
     @Override
@@ -131,9 +150,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void setup() {
-        Toast.makeText(getApplicationContext(),
-                R.string.bluetooth_open, Toast.LENGTH_SHORT).show();
+    void setup(int status) {
+        switch (status) {
+            case SETUP_OPEN_BLUETOOTH:
+                Toast.makeText(getApplicationContext(),
+                        R.string.bluetooth_open, Toast.LENGTH_SHORT).show();
+                break;
+            case SETUP_RECONNECT_BLUETOOTH:
+                break;
+        }
         isBluetoothAvailavle = false;
     }
 
@@ -143,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case HANDLER_SETUP_BLUETOOTH:
-                    setup();
+                    setup(SETUP_OPEN_BLUETOOTH);
                     return;
             }
         }
