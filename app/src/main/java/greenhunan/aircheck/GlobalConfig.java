@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.sax.RootElement;
 
 import greenhunan.aircheck.model.User;
 
@@ -27,6 +28,7 @@ public class GlobalConfig {
         return id;
     }
 
+    // used when the user types username and password
     public synchronized static void setUser(User user, String id) {
         GlobalConfig.user = user;
         GlobalConfig.id = id;
@@ -54,9 +56,10 @@ public class GlobalConfig {
     }
 
     // called after 'isUserLocallyAvailable' returns true
-    public synchronized static void getUser(Context context) {
+    public synchronized static User getUser(Context context) {
         checkUserAvailability();
         GlobalConfig.user = retrieveUser(context);
+        return GlobalConfig.user;
     }
 
     public synchronized static void setId(String id) {

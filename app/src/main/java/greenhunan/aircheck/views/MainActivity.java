@@ -19,6 +19,7 @@ import app.akexorcist.bluetotohspp.library.BluetoothSPP;
 import app.akexorcist.bluetotohspp.library.BluetoothState;
 import app.akexorcist.bluetotohspp.library.DeviceList;
 import greenhunan.aircheck.R;
+import greenhunan.aircheck.presenter.MainActivityPresenter;
 import greenhunan.aircheck.service.DataService;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,15 +30,17 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int SETUP_OPEN_BLUETOOTH = 1;
     public static final int SETUP_RECONNECT_BLUETOOTH = 2;
-    public static final int SETUP_OPEN_BLUETOOTH_AND_GPS = 3;
+    public static final int SETUP_OPEN_GPS = 3;
+    public static final int SETUP_OPEN_BLUETOOTH_AND_GPS = 4;
 
     private static final String TAG = "Main Activity";
 
     int countdown = 0;
 
-    BluetoothSPP bt;
-
     boolean isBluetoothAvailavle = false;
+
+    MainActivityPresenter presenter;
+    BluetoothSPP bt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        presenter = new MainActivityPresenter(getApplicationContext());
+
+        loginCheck();
 
         bt = new BluetoothSPP(getApplicationContext());
         bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() {
@@ -81,6 +88,13 @@ public class MainActivity extends AppCompatActivity {
         if (!bt.isBluetoothAvailable())
             mHandler.sendEmptyMessageDelayed(HANDLER_SETUP_BLUETOOTH, 1000);
 
+    }
+
+    // enter login page if the user is not available
+    void loginCheck() {
+        if (!presenter.initialLogin()) {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        }
     }
 
     @Override
@@ -158,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
                         R.string.bluetooth_open, Toast.LENGTH_SHORT).show();
                 break;
             case SETUP_RECONNECT_BLUETOOTH:
+                Toast.makeText(getApplicationContext(),
+                        R.string.bluetooth_reconnect, Toast.LENGTH_SHORT).show();
                 break;
         }
         isBluetoothAvailavle = false;

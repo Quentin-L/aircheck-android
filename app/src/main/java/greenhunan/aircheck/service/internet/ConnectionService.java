@@ -18,7 +18,7 @@ public class ConnectionService {
 
     public static RequestService requestService = retrofit.create(RequestService.class);
 
-    public static final int COONECTION_SUCCESS_PASS = 1;
-    public static final int COONECTION_SUCCESS_FAIL = 2;
-    public static final int CONNECTION_FAILURE = 3;
+    public static final int COONECTION_SUCCESS_PASS = 1; // cheer
+    public static final int COONECTION_SUCCESS_FAIL = 2; //wrong password or username
+    public static final int CONNECTION_FAILURE = 3; // Internet connect
 }

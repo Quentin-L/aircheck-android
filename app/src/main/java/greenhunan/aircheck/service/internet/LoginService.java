@@ -17,11 +17,11 @@ import retrofit2.Response;
 /**
  * Created by Quentin on 9/20/16.
  */
-public class LoginService implements LoginRequest {
+public class LoginService {
 
     static final String TAG = "LoginService";
 
-    public int login(final User user) {
+    public static int login(final User user) {
         final State state = new State();
 
         Call<String> token = ConnectionService.requestService.getToken();
@@ -64,7 +64,7 @@ public class LoginService implements LoginRequest {
 
     }
 
-    private class State {
+    private static class State {
         int state = -999;
 
         public int getState() {
