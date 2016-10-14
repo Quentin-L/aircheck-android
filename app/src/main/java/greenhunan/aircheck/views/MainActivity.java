@@ -3,6 +3,8 @@ package greenhunan.aircheck.views;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +24,8 @@ import greenhunan.aircheck.service.DataService;
 public class MainActivity extends AppCompatActivity {
 
     public static final String Message = "data";
+
+    public static final int HANDLER_SETUP_BLUETOOTH = 1;
 
     private static final String TAG = "Main Activity";
 
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         if (!bt.isBluetoothAvailable())
-            setup();
+            mHandler.sendEmptyMessageDelayed(HANDLER_SETUP_BLUETOOTH, 1000);
 
     }
 
@@ -132,4 +136,16 @@ public class MainActivity extends AppCompatActivity {
                 R.string.bluetooth_open, Toast.LENGTH_SHORT).show();
         isBluetoothAvailavle = false;
     }
+
+    public Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case HANDLER_SETUP_BLUETOOTH:
+                    setup();
+                    return;
+            }
+        }
+    };
 }
