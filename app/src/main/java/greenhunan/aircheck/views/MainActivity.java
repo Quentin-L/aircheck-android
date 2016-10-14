@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int SETUP_OPEN_BLUETOOTH = 1;
     public static final int SETUP_RECONNECT_BLUETOOTH = 2;
+    public static final int SETUP_OPEN_BLUETOOTH_AND_GPS = 3;
 
     private static final String TAG = "Main Activity";
 
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (bt.isBluetoothAvailable())
-            setup(SETUP_OPEN_BLUETOOTH); // TODO: 10/14/16 use handler or method call? 
+            setup(SETUP_OPEN_BLUETOOTH); // TODO: 10/14/16 use handler or method call?
     }
 
     @Override

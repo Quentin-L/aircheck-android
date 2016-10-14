@@ -5,6 +5,8 @@ package greenhunan.aircheck.model;
  */
 public class User {
 
+    public static final String USERNAME = "username";
+    public static final String PASSWORD = "password";
 
     private String username;
     private String password;

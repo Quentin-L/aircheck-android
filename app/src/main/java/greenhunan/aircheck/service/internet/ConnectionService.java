@@ -11,7 +11,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ConnectionService {
 
     private static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(GlobalConfig.base_URL)
+            .baseUrl(GlobalConfig.BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(JacksonConverterFactory.create())
             .build();
